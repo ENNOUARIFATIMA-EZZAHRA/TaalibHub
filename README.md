@@ -96,7 +96,8 @@ Ce projet a également une **vocation pédagogique** car il :
 ### Diagramme uml ###
 *diagramme de use case 
 
-<img width="556" alt="image" src="https://github.com/user-attachments/assets/d1cf261b-034a-4a03-8c34-e0a150e0b36f" />
+<img width="419" alt="image" src="https://github.com/user-attachments/assets/e292a3d9-1a07-4ed9-81ba-4122315d2de9" />
+
 
 
 *diagramme de class*
