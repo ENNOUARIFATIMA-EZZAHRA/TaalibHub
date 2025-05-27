@@ -3,7 +3,8 @@
 ### Diagramme uml ###
 *diagramme de use case 
 
-<img width="542" alt="image" src="https://github.com/user-attachments/assets/6e25e12c-7799-4037-a867-fd59f307b06a" />
+<img width="556" alt="image" src="https://github.com/user-attachments/assets/d1cf261b-034a-4a03-8c34-e0a150e0b36f" />
+
 
 *diagramme de class*
 
