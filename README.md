@@ -114,4 +114,9 @@ Ce projet a également une **vocation pédagogique** car il :
 
 <img width="628" alt="image" src="https://github.com/user-attachments/assets/bbacf7d7-db2a-4a0b-8101-1ee587db2744" />
 
+*Diagramme de Séquence - Administrateur génère un rapport*
+
+<img width="758" alt="image" src="https://github.com/user-attachments/assets/73c4ad52-d8ea-46da-b930-a4777d03d20b" />
+
+
 
