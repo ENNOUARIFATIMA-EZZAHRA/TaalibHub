@@ -8,11 +8,16 @@
 
 *diagramme de class*
 
-<img width="429" alt="image" src="https://github.com/user-attachments/assets/223e12c3-1260-4c21-a210-ad87fc8ab1fe" />
+<img width="538" alt="image" src="https://github.com/user-attachments/assets/781787be-0d4c-4a25-a596-b32b8604c5cc" />
 
-*Diagramme de Séquence - Étudiant consulte ses notes
 
-<img width="588" alt="image" src="https://github.com/user-attachments/assets/235aeb93-0bcb-45b4-b33d-1ccc22569d8f" />
+*Diagramme de Séquence - Étudiant consulte ses notes*
 
+<img width="629" alt="image" src="https://github.com/user-attachments/assets/741e8f37-68bf-4315-975b-c264cd716106" />
+
+*Diagramme de Séquence - Enseignant saisit les notes*
+
+
+<img width="628" alt="image" src="https://github.com/user-attachments/assets/bbacf7d7-db2a-4a0b-8101-1ee587db2744" />
 
 
