@@ -96,13 +96,13 @@ Ce projet a également une **vocation pédagogique** car il :
 ### Diagramme uml ###
 *diagramme de use case 
 
-<img width="419" alt="image" src="https://github.com/user-attachments/assets/e292a3d9-1a07-4ed9-81ba-4122315d2de9" />
-
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/1b15428c-e2cc-483b-9879-b32ec6038eec" />
 
 
 *diagramme de class*
 
-<img width="538" alt="image" src="https://github.com/user-attachments/assets/781787be-0d4c-4a25-a596-b32b8604c5cc" />
+<img width="437" alt="image" src="https://github.com/user-attachments/assets/33cc57b1-0037-4db7-80a6-8b425a295aa2" />
+
 
 
 *Diagramme de Séquence - Étudiant consulte ses notes*
