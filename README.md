@@ -114,9 +114,18 @@ Ce projet a également une **vocation pédagogique** car il :
 
 <img width="628" alt="image" src="https://github.com/user-attachments/assets/bbacf7d7-db2a-4a0b-8101-1ee587db2744" />
 
-*Diagramme de Séquence - Administrateur génère un rapport*
 
-<img width="758" alt="image" src="https://github.com/user-attachments/assets/73c4ad52-d8ea-46da-b930-a4777d03d20b" />
+*Ajout d'un Feedback par un Étudiant
+
+<img width="598" alt="image" src="https://github.com/user-attachments/assets/79d1a80e-50f1-45e0-a93e-3cc3c5ce1e80" />
+
+
+*diagramme de séquence détaillé pour l'enregistrement des présences
+
+
+<img width="522" alt="image" src="https://github.com/user-attachments/assets/97bb8113-4304-48f7-a5d4-706ccbc146ae" />
+
+
 
 
 
