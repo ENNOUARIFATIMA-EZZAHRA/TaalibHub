@@ -117,13 +117,14 @@ Ce projet a également une **vocation pédagogique** car il :
 
 *Ajout d'un Feedback par un Étudiant
 
-<img width="598" alt="image" src="https://github.com/user-attachments/assets/79d1a80e-50f1-45e0-a93e-3cc3c5ce1e80" />
+<img width="393" alt="image" src="https://github.com/user-attachments/assets/b93b0247-a9b7-435c-9d00-d5511ec21d2e" />
 
 
 *diagramme de séquence détaillé pour l'enregistrement des présences
 
+<img width="429" alt="image" src="https://github.com/user-attachments/assets/2873cba1-7141-45ec-bd30-c8734737f5d8" />
 
-<img width="522" alt="image" src="https://github.com/user-attachments/assets/97bb8113-4304-48f7-a5d4-706ccbc146ae" />
+
 
 
 
