@@ -101,29 +101,35 @@ Ce projet a également une **vocation pédagogique** car il :
 
 *diagramme de class*
 
-<img width="437" alt="image" src="https://github.com/user-attachments/assets/33cc57b1-0037-4db7-80a6-8b425a295aa2" />
+<img width="452" alt="image" src="https://github.com/user-attachments/assets/f0180390-52cc-46ef-8663-8d30b2aed80b" />
+
 
 
 
 *Diagramme de Séquence - Étudiant consulte ses notes*
 
-<img width="629" alt="image" src="https://github.com/user-attachments/assets/741e8f37-68bf-4315-975b-c264cd716106" />
+<img width="596" alt="image" src="https://github.com/user-attachments/assets/feb4758c-1fd6-40e9-8ff3-9694f375d8be" />
+
+
 
 *Diagramme de Séquence - Enseignant saisit les notes*
 
 
-<img width="628" alt="image" src="https://github.com/user-attachments/assets/bbacf7d7-db2a-4a0b-8101-1ee587db2744" />
+<img width="605" alt="image" src="https://github.com/user-attachments/assets/e4c99d9a-e80a-4cc5-8b5f-fe078c9a2180" />
 
-
-*Ajout d'un Feedback par un Étudiant
-
-<img width="393" alt="image" src="https://github.com/user-attachments/assets/b93b0247-a9b7-435c-9d00-d5511ec21d2e" />
 
 
 *diagramme de séquence détaillé pour l'enregistrement des présences
 
-<img width="429" alt="image" src="https://github.com/user-attachments/assets/2873cba1-7141-45ec-bd30-c8734737f5d8" />
 
+<img width="575" alt="image" src="https://github.com/user-attachments/assets/53b0beee-f06b-4f5d-8ab3-61297f16a8ae" />
+
+
+
+*diagramme de séquence Etudiante consulter son taux de présence
+
+
+![image](https://github.com/user-attachments/assets/d61053ff-160b-4263-9383-c5eb9fa0c233)
 
 
 
