@@ -13,6 +13,7 @@
 **diagramme de sequence enseignant ajouter les notes**
 <img width="598" alt="image" src="https://github.com/user-attachments/assets/96f8948e-c543-46c0-b66e-b25f75764cd4" />
 
+
 **Diagramme de Séquence - Étudiant consulte ses notes**
 ![image](https://github.com/user-attachments/assets/c47bb24c-1b01-4301-aa0b-5e3f1badf638)
 
