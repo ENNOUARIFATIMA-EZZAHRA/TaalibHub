@@ -1,4 +1,5 @@
 package com.taliibHub.backend.enums;
 
-public class TypeEvaluation {
+public enum TypeEvaluation {
+    TP, EXAMEN, INTERRO
 }

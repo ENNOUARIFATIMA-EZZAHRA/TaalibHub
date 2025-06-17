@@ -1,4 +1,7 @@
 package com.taliibHub.backend.enums;
 
-public class RoleUtilisateur {
+public enum RoleUtilisateur {
+    ADMIN,
+    ETUDIANT,
+    ENSEIGNANT
 }

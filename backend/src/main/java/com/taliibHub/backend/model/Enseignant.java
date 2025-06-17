@@ -1,4 +1,9 @@
 package com.taliibHub.backend.model;
 
-public class Enseignant {
+import jakarta.persistence.Entity;
+
+@Entity
+public class Enseignant extends Utilisateur {
+    private String specialite;
 }
+
