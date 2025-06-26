@@ -4,7 +4,9 @@ import com.taliibHub.backend.dto.AuthRequest;
 import com.taliibHub.backend.dto.AuthResponse;
 import com.taliibHub.backend.dto.RegisterRequest;
 import com.taliibHub.backend.model.Utilisateur;
+import com.taliibHub.backend.model.Etudiant;
 import com.taliibHub.backend.repository.UtilisateurRepository;
+import com.taliibHub.backend.repository.EtudiantRepository;
 import com.taliibHub.backend.security.JwtUtil;
 import com.taliibHub.backend.enums.RoleUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.util.UUID;
 public class AuthService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    @Autowired
+    private EtudiantRepository etudiantRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -32,6 +36,13 @@ public class AuthService {
         user.setMotDePass(passwordEncoder.encode(req.getMotDePass()));
         user.setRole(RoleUtilisateur.ETUDIANT);
         utilisateurRepository.save(user);
+        Etudiant etudiant = new Etudiant();
+        etudiant.setId(user.getId());
+        etudiant.setNom(user.getNom());
+        etudiant.setEmail(user.getEmail());
+        etudiant.setMotDePass(user.getMotDePass());
+        etudiant.setRole(user.getRole());
+        etudiantRepository.save(etudiant);
         String token = jwtUtil.generateToken(user);
         AuthResponse res = new AuthResponse();
         res.setToken(token);

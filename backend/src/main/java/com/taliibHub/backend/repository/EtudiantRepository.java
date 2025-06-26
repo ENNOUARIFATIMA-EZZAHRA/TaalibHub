@@ -1,4 +1,9 @@
 package com.taliibHub.backend.repository;
 
-public class EtudiantRepository {
+import com.taliibHub.backend.model.Etudiant;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EtudiantRepository extends JpaRepository<Etudiant, String> {
+    Etudiant findByEmail(String email);
+    Etudiant findByNum(int num);
 }
