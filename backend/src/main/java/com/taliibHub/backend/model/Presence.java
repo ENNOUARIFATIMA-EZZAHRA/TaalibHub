@@ -1,12 +1,12 @@
 package com.taliibHub.backend.model;
 
-import ch.qos.logback.core.status.Status;
+import com.taliibHub.backend.enums.Status;
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
 public class Presence {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -22,4 +22,3 @@ public class Presence {
     @ManyToOne
     private Cours cours;
 }
-

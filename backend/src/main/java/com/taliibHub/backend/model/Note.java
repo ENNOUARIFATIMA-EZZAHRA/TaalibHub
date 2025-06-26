@@ -14,7 +14,7 @@ public class Note {
     private Long id;
 
     private float valeur;
-    private String typeEvaluation; // TP, examen...
+    private String typeEvaluation; 
     private LocalDate date;
 
     @ManyToOne

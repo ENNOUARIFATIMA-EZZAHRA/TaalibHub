@@ -1,5 +1,4 @@
 package com.taliibHub.backend.model;
-
 import jakarta.persistence.Entity;
 
 import java.util.Date;
