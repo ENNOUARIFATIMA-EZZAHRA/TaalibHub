@@ -1,4 +1,7 @@
 package com.taliibHub.backend.repository;
 
-public class CoursRepository {
+import com.taliibHub.backend.model.Cours;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CoursRepository extends JpaRepository<Cours, Long> {
 }
