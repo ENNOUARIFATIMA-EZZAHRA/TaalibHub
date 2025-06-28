@@ -12,7 +12,9 @@ import com.taliibHub.backend.enums.RoleUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
+import java.util.Date;
 
 @Service
 public class AuthService {
@@ -25,42 +27,44 @@ public class AuthService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Transactional
     public AuthResponse register(RegisterRequest req) {
-        if (utilisateurRepository.findByEmail(req.getEmail()) != null) {
+        if (etudiantRepository.findByEmail(req.getEmail()) != null) {
             throw new RuntimeException("Cet email est déjà utilisé.");
         }
-        Utilisateur user = new Utilisateur();
-        user.setId(UUID.randomUUID().toString());
-        user.setNom(req.getNom());
-        user.setEmail(req.getEmail());
-        user.setMotDePass(passwordEncoder.encode(req.getMotDePass()));
-        user.setRole(RoleUtilisateur.ETUDIANT);
-        utilisateurRepository.save(user);
+        
+        String userId = UUID.randomUUID().toString();
+        
+        // Create and save Etudiant (which extends Utilisateur)
         Etudiant etudiant = new Etudiant();
-        etudiant.setId(user.getId());
-        etudiant.setNom(user.getNom());
-        etudiant.setEmail(user.getEmail());
-        etudiant.setMotDePass(user.getMotDePass());
-        etudiant.setRole(user.getRole());
+        etudiant.setId(userId);
+        etudiant.setNom(req.getNom());
+        etudiant.setEmail(req.getEmail());
+        etudiant.setMotDePass(passwordEncoder.encode(req.getPassword()));
+        etudiant.setRole(RoleUtilisateur.ETUDIANT);
+        etudiant.setDateInscription(new Date());
         etudiantRepository.save(etudiant);
-        String token = jwtUtil.generateToken(user);
+        
+        String token = jwtUtil.generateToken(etudiant);
         AuthResponse res = new AuthResponse();
         res.setToken(token);
+        res.setUser(etudiant);
         return res;
     }
 
     public AuthResponse login(AuthRequest req) {
-        Utilisateur user = utilisateurRepository.findByEmail(req.getEmail());
-        if (user == null || !passwordEncoder.matches(req.getMotDePass(), user.getMotDePass())) {
+        Etudiant etudiant = etudiantRepository.findByEmail(req.getEmail());
+        if (etudiant == null || !passwordEncoder.matches(req.getPassword(), etudiant.getMotDePass())) {
             throw new RuntimeException("Email ou mot de passe incorrect");
         }
-        String token = jwtUtil.generateToken(user);
+        String token = jwtUtil.generateToken(etudiant);
         AuthResponse res = new AuthResponse();
         res.setToken(token);
+        res.setUser(etudiant);
         return res;
     }
 
     public Utilisateur getCurrentUser(String email) {
-        return utilisateurRepository.findByEmail(email);
+        return etudiantRepository.findByEmail(email);
     }
 }
