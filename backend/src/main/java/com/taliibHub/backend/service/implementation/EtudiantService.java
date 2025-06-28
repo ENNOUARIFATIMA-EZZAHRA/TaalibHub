@@ -42,7 +42,8 @@ public class EtudiantService {
         etudiant.setPrenom(etudiantData.getPrenom());
         etudiant.setEmail(etudiantData.getEmail());
         etudiant.setMotDePass(etudiantData.getMotDePass());
-        etudiant.setRole(etudiantData.getRole() != null ? etudiantData.getRole() : RoleUtilisateur.ETUDIANT);
+        // Force role to be ETUDIANT for etudiant creation
+        etudiant.setRole(RoleUtilisateur.ETUDIANT);
         
         // Use values from request or set defaults if not provided
         if (etudiantData.getNum() > 0) {
