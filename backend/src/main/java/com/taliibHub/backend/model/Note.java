@@ -22,4 +22,11 @@ public class Note {
 
     @ManyToOne
     private Cours cours;
+
+    public Long getId() { return id; }
+    public float getValeur() { return valeur; }
+    public String getTypeEvaluation() { return typeEvaluation; }
+    public LocalDate getDate() { return date; }
+    public Etudiant getEtudiant() { return etudiant; }
+    public Cours getCours() { return cours; }
 }

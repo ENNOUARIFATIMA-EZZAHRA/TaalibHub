@@ -13,11 +13,19 @@ public class Cours {
     private String code;
     private String titre;
     private String semester;
+    private String description;
 
     @ManyToOne
     private Enseignant enseignant;
 
     @OneToMany(mappedBy = "cours")
     private List<Presence> presences;
+
+    public String getCode() { return code; }
+    public String getTitre() { return titre; }
+    public String getSemester() { return semester; }
+    public Enseignant getEnseignant() { return enseignant; }
+    public List<Presence> getPresences() { return presences; }
+    public String getDescription() { return description; }
 }
 
