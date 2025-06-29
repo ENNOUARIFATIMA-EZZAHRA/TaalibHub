@@ -21,4 +21,11 @@ public class Feedback {
 
     @ManyToOne
     private Cours cours;
+
+    @ManyToOne
+    private Note note;
+
+    public String getContenu() { return contenu; }
+
+    public Note getNote() { return note; }
 }
