@@ -1,0 +1,69 @@
+<nav class="bg-white shadow flex items-center justify-between px-8 py-2">
+  <!-- Logo et titre -->
+  <div class="relative flex items-center space-x-2">
+    <!-- Pink dot -->
+    <span class="absolute -top-2 left-5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 opacity-90 shadow-lg border-2 border-white"></span>
+    <!-- Graduation cap SVG with shadow and rotation -->
+    <div class="relative flex items-center justify-center">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="drop-shadow-lg rotate-[-8deg] bg-white rounded-full border border-gray-100">
+        <circle cx="12" cy="12" r="11" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+        <path d="M2 7L12 2L22 7L12 12L2 7Z" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+        <path d="M6 9V14C6 16.2091 9.13401 18 12 18C14.866 18 18 16.2091 18 14V9" stroke="url(#grad1)" stroke-width="2" fill="none"/>
+        <defs>
+          <linearGradient id="grad1" x1="2" y1="2" x2="22" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#2563eb"/>
+            <stop offset="1" stop-color="#a21caf"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div>
+      <span class="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text tracking-wide">TaalibHube</span>
+      <div class="text-xs text-gray-400 -mt-1 tracking-wide">ACADEMIC PLATFORM</div>
+    </div>
+  </div>
+  <!-- Navigation -->
+  <div class="flex-1 flex items-center justify-center space-x-6">
+    <a routerLink="/etudiante/dashboard"
+       routerLinkActive="text-blue-700 font-semibold border-b-2 border-blue-700"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M3 17L9 11L13 15L21 7" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7V13M21 7H15" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Tableau de Bord</span>
+    </a>
+    <a routerLink="/etudiante/mes-cours"
+       routerLinkActive="text-blue-700 font-semibold border-b-2 border-blue-700"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h12a2 2 0 012 2v14l-8-4-8 4z" fill="#374151"/></svg>
+      <span>Mes Cours</span>
+    </a>
+    <a routerLink="#" class="text-gray-700 hover:text-blue-700 flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M7 17V7a2 2 0 012-2h6a2 2 0 012 2v10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Mes Notes</span>
+    </a>
+    <a routerLink="#" class="text-gray-700 hover:text-blue-700 flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" fill="#374151"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Présence</span>
+    </a>
+    <a routerLink="#" class="text-gray-700 hover:text-blue-700 flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" fill="#374151"/><text x="8" y="15" font-size="8" fill="#fff">!</text></svg>
+      <span>Mes Feedbacks</span>
+    </a>
+  </div>
+  <!-- Profil -->
+  <div class="flex items-center space-x-3">
+    <!-- Notification -->
+    <div class="relative">
+      <span class="material-icons text-gray-500 text-2xl">notifications_none</span>
+      <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+    </div>
+    <div class="text-right mr-2">
+      <div class="text-gray-800 font-semibold leading-tight">{{ nom }}</div>
+      <div class="text-blue-500 text-xs -mt-1">{{ statut }}</div>
+    </div>
+    <div class="rounded-full border-2 border-green-300 p-0.5">
+      <img [src]="avatarUrl" alt="avatar" class="h-10 w-10 rounded-full object-cover" />
+    </div>
+  </div>
+</nav> 

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+nav {
+  font-family: 'Inter', sans-serif;
+}
+.material-icons {
+  font-size: 22px;
+  vertical-align: middle;
+}
+.bg-pink-500 {
+  background-color: #ec4899;
+}
+.bg-red-500 {
+  background-color: #ef4444;
+}
+.border-green-300 {
+  border-color: #6ee7b7;
+} 
