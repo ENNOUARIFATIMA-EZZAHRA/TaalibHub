@@ -27,5 +27,6 @@ public class Cours {
     public Enseignant getEnseignant() { return enseignant; }
     public List<Presence> getPresences() { return presences; }
     public String getDescription() { return description; }
+    public String getNom() { return titre; }
 }
 

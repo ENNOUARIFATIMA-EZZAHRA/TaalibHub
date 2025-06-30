@@ -1,0 +1,61 @@
+<app-navbar-etudiant></app-navbar-etudiant>
+<div class="px-8 py-4">
+  <h2 class="text-2xl font-bold mb-2">Mes Notes et Évaluations</h2>
+  <p class="text-gray-500 mb-6">Consultez vos résultats et suivez votre progression académique</p>
+  
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex justify-center items-center py-12">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    <span class="ml-3 text-gray-600">Chargement des notes...</span>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+    <div class="text-red-600 font-semibold mb-2">{{ error }}</div>
+    <button (click)="ngOnInit()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+      Réessayer
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!loading && !error">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white rounded-lg border p-6 shadow-sm flex flex-col items-center">
+        <div class="text-gray-500 text-sm mb-2">Moyenne Générale</div>
+        <div class="text-blue-600 font-bold text-2xl">{{ moyenne | number:'1.1-2' }}/20</div>
+        <div class="text-xs text-gray-400">Toutes évaluations confondues</div>
+      </div>
+      <div class="bg-white rounded-lg border p-6 shadow-sm flex flex-col items-center">
+        <div class="text-gray-500 text-sm mb-2">Évaluations</div>
+        <div class="text-green-600 font-bold text-2xl">{{ nbEvaluations }}</div>
+        <div class="text-xs text-gray-400">Notes enregistrées</div>
+      </div>
+    </div>
+    
+    <!-- No Notes Message -->
+    <div *ngIf="notes.length === 0" class="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
+      <div class="text-gray-500 text-lg mb-2">Aucune note disponible</div>
+      <div class="text-gray-400 text-sm">Vos notes apparaîtront ici une fois qu'elles seront publiées par vos enseignants.</div>
+    </div>
+
+    <!-- Notes List -->
+    <div *ngFor="let note of notes" class="bg-white rounded-lg border p-4 shadow-sm mb-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <span class="text-xs font-bold text-gray-500">{{ note.typeEvaluation }}</span>
+          <span class="ml-2 text-xs text-gray-400">{{ note.coursCode }}</span>
+          <span class="ml-2 text-xs text-gray-400">{{ note.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="text-lg font-bold"
+             [ngClass]="{'text-green-600': note.valeur >= 16, 'text-yellow-600': note.valeur >= 12 && note.valeur < 16, 'text-red-600': note.valeur < 12}">
+          {{ note.valeur }}/20
+        </div>
+      </div>
+      <div class="font-semibold mt-1">{{ note.coursTitre }}</div>
+      <div class="text-xs text-gray-500 mb-1">{{ note.coursMatiere }}</div>
+      <div *ngIf="note.feedback" class="bg-blue-50 text-blue-700 text-xs rounded p-2 mt-2">
+        Feedback: {{ note.feedback }}
+      </div>
+    </div>
+  </div>
+</div> 

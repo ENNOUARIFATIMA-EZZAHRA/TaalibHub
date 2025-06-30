@@ -33,32 +33,54 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String email = null;
         String jwt = null;
 
+        System.out.println("JwtAuthenticationFilter - Processing request: " + request.getServletPath());
+        System.out.println("JwtAuthenticationFilter - Authorization header: " + (authHeader != null ? "Present" : "Missing"));
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
+            System.out.println("JWT reçu dans la requête: " + jwt);
+            System.out.println("JwtAuthenticationFilter - JWT token extracted: " + (jwt != null ? "Yes" : "No"));
+            
             try {
                 email = jwtUtil.extractEmail(jwt);
+                System.out.println("Email extrait du JWT: " + email);
             } catch (ExpiredJwtException e) {
-                // Token expired
+                System.out.println("JWT expiré");
+                System.out.println("Détail: " + e.getMessage());
             } catch (Exception e) {
-                // Invalid token
+                System.out.println("JWT invalide");
+                System.out.println("JWT invalide: " + e.getMessage());
             }
+        } else {
+            System.out.println("JwtAuthenticationFilter - No Authorization header or invalid format");
         }
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
             if (utilisateur != null) {
+                System.out.println("JwtAuthenticationFilter - User found: " + utilisateur.getEmail());
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         utilisateur, null, Collections.emptyList());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("JwtAuthenticationFilter - Authentication set successfully");
+            } else {
+                System.out.println("JwtAuthenticationFilter - User not found for email: " + email);
             }
+        } else if (email == null) {
+            System.out.println("JwtAuthenticationFilter - No email extracted from token");
+        } else {
+            System.out.println("JwtAuthenticationFilter - Authentication already exists");
         }
+        
         filterChain.doFilter(request, response);
     }
 
     @Override
     protected boolean shouldNotFilter(jakarta.servlet.http.HttpServletRequest request) throws jakarta.servlet.ServletException {
         String path = request.getServletPath();
-        return path.startsWith("/api/auth/");
+        boolean shouldNotFilter = path.startsWith("/api/auth/");
+        System.out.println(" JwtAuthenticationFilter - Should not filter path '" + path + "': " + shouldNotFilter);
+        return shouldNotFilter;
     }
 } 

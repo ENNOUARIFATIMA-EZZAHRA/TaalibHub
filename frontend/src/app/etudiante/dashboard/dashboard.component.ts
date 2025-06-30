@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EtudiantDashboardService } from './etudiant-dashboard.service';
+import { EtudiantDashboardService } from '../../service/etudiant-dashboard.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
