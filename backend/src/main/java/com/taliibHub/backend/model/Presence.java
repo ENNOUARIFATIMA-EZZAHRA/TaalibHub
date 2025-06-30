@@ -21,4 +21,11 @@ public class Presence {
 
     @ManyToOne
     private Cours cours;
+
+    private String heure;
+
+    public Cours getCours() { return cours; }
+    public Date getDate() { return date; }
+    public Status getStatus() { return status; }
+    public String getHeure() { return heure; }
 }

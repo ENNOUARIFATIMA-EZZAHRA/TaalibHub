@@ -1,0 +1,43 @@
+<div class="px-16 py-10">
+  <h1 class="text-4xl font-bold mb-2">Mes Messages</h1>
+  <p class="text-gray-500 mb-8">Messages et conseils de vos enseignants</p>
+
+  <div *ngIf="loading" class="text-blue-600 font-semibold my-8">Chargement...</div>
+  <div *ngIf="error" class="text-red-500 font-semibold my-8">{{ error }}</div>
+
+  <div *ngFor="let fb of feedbacks; let i = index" 
+       class="bg-white rounded-2xl shadow p-8 mb-6 border-l-8 transition-all flex flex-col gap-2"
+       [ngClass]="{
+         'border-blue-600': fb.nouveau,
+         'border-orange-400': fb.type === 'warning',
+         'border-gray-200': !fb.nouveau && fb.type !== 'warning'
+       }">
+    <div class="flex items-center justify-between mb-2">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl"
+              [ngClass]="{
+                'text-green-500': fb.type !== 'warning',
+                'text-orange-400': fb.type === 'warning'
+              }">
+          <ng-container *ngIf="fb.type === 'warning'; else successIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.007v.008H12v-.008zm9.53-2.28a9 9 0 11-15.06 0A9 9 0 0121.53 14.22z" /></svg>
+          </ng-container>
+          <ng-template #successIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75v-1.5A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25v1.5m7.5 0h-7.5m7.5 0a2.25 2.25 0 012.25 2.25v1.5m-11.25-3.75A2.25 2.25 0 003 8.25v1.5m0 0h18m-18 0v7.5A2.25 2.25 0 005.25 19.5h13.5A2.25 2.25 0 0021 17.25v-7.5m-18 0h18" /></svg>
+          </ng-template>
+        </span>
+        <div>
+          <div class="font-bold text-lg">{{ fb.prof }}</div>
+          <div class="text-gray-500 text-base">{{ fb.matiere }}</div>
+        </div>
+      </div>
+      <div class="text-gray-500 text-base flex items-center gap-2 min-w-[120px] justify-end">
+        <span>{{ fb.date | date:'dd/MM/yyyy' }}</span>
+        <span *ngIf="fb.nouveau" class="bg-gray-100 text-blue-700 rounded-full px-4 py-1 text-sm font-bold ml-2">Nouveau</span>
+      </div>
+    </div>
+    <div class="mt-2 text-lg text-gray-700">
+      {{ fb.message }}
+    </div>
+  </div>
+</div> 

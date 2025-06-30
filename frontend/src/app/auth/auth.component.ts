@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +22,7 @@ export class AuthComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -38,11 +38,11 @@ export class AuthComponent {
 
   isFormValid(): boolean {
     if (this.isLogin) {
-      return this.email.trim() !== '' && this.validateEmail(this.email) && 
+      return this.email.trim() !== '' && this.validateEmail(this.email) &&
              this.password.trim() !== '' && this.validatePassword(this.password);
     } else {
-      return this.name.trim() !== '' && this.email.trim() !== '' && this.validateEmail(this.email) && 
-             this.password.trim() !== '' && this.validatePassword(this.password) && 
+      return this.name.trim() !== '' && this.email.trim() !== '' && this.validateEmail(this.email) &&
+             this.password.trim() !== '' && this.validatePassword(this.password) &&
              this.validateConfirmPassword();
     }
   }
@@ -67,23 +67,37 @@ export class AuthComponent {
   }
 
   private async login() {
-    const loginData = {
-      email: this.email,
-      password: this.password
-    };
-
     try {
-      const response: any = await this.http.post('http://localhost:8080/api/auth/login', loginData).toPromise();
-      
+      const response = await this.authService.login(this.email, this.password).toPromise();
+
+      console.log('🔐 AuthComponent - Login response:', response);
+
       if (response && response.token) {
+        console.log('🔐 AuthComponent - Storing token in localStorage');
+
+
+        localStorage.setItem('jwt_token', response.token);
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        this.router.navigate(['/dashboard']);
+
+        if (response.user) {
+          localStorage.setItem('user', JSON.stringify(response.user));
+        }
+
+        console.log('🔐 AuthComponent - Token stored successfully');
+        console.log('🔐 AuthComponent - localStorage token:', localStorage.getItem('jwt_token'));
+        console.log('🔐 AuthComponent - localStorage user:', localStorage.getItem('user'));
+
+
+        if (response.user && response.user.role === 'ETUDIANT') {
+          this.router.navigate(['/etudiante/dashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       } else {
         throw new Error('Login failed - no token received');
       }
     } catch (error: any) {
-      console.error('Login error:', error);
+      console.error('🔐 AuthComponent - Login error:', error);
       if (error.status === 403) {
         throw new Error('Invalid email or password');
       } else if (error.status === 0) {
@@ -95,15 +109,9 @@ export class AuthComponent {
   }
 
   private async register() {
-    const registerData = {
-      nom: this.name,
-      email: this.email,
-      password: this.password
-    };
-
     try {
-      const response: any = await this.http.post('http://localhost:8080/api/auth/register', registerData).toPromise();
-      
+      const response = await this.authService.register(this.name, this.email, this.password).toPromise();
+
       if (response) {
         // Switch to login mode after successful registration
         this.isLogin = true;
@@ -133,4 +141,4 @@ export class AuthComponent {
     this.confirmPassword = '';
     this.name = '';
   }
-} 
+}

@@ -15,17 +15,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/etudiant")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 public class EtudiantController {
     @Autowired
     private CoursRepository coursRepository;
 
     @Autowired
     private EtudiantService etudiantService;
-
-    @GetMapping("/cours")
-    public List<Cours> getAllCours() {
-        return coursRepository.findAll();
-    }
 
     @GetMapping("/dashboard/{num}")
     public EtudiantDashboardDTO getDashboard(@PathVariable int num) {

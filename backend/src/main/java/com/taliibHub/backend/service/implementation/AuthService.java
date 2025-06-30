@@ -9,6 +9,8 @@ import com.taliibHub.backend.repository.UtilisateurRepository;
 import com.taliibHub.backend.repository.EtudiantRepository;
 import com.taliibHub.backend.security.JwtUtil;
 import com.taliibHub.backend.enums.RoleUtilisateur;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,8 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JwtUtil jwtUtil;
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     @Transactional
     public AuthResponse register(RegisterRequest req) {
@@ -54,6 +58,15 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest req) {
         Etudiant etudiant = etudiantRepository.findByEmail(req.getEmail());
+        logger.info("Tentative de connexion pour l'email : {}", req.getEmail());
+        if (etudiant == null) {
+            logger.warn("Aucun utilisateur trouvé pour l'email : {}", req.getEmail());
+        } else {
+            logger.info("Mot de passe reçu : {}", req.getPassword());
+            logger.info("Hash stocké : {}", etudiant.getMotDePass());
+            boolean match = passwordEncoder.matches(req.getPassword(), etudiant.getMotDePass());
+            logger.info("Résultat du passwordEncoder.matches : {}", match);
+        }
         if (etudiant == null || !passwordEncoder.matches(req.getPassword(), etudiant.getMotDePass())) {
             throw new RuntimeException("Email ou mot de passe incorrect");
         }

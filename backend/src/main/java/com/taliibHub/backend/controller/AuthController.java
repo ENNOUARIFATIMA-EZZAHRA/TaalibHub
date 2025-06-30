@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.taliibHub.backend.dto.AuthResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.Authentication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,5 +77,43 @@ public class AuthController {
             error.put("message", e.getMessage());
             return ResponseEntity.badRequest().body(error);
         }
+    }
+
+    @PostMapping("/test")
+    public ResponseEntity<?> testAuth() {
+        logger.info("Testing authentication endpoint");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Authentication working correctly");
+        response.put("status", "success");
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> testAuthGet() {
+        logger.info("Testing GET authentication endpoint");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "GET Authentication working correctly");
+        response.put("status", "success");
+        response.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/test-auth")
+    public ResponseEntity<?> testAuth(Authentication authentication) {
+        System.out.println("🔐 AuthController - testAuth called");
+        
+        if (authentication == null || authentication.getPrincipal() == null) {
+            System.out.println("❌ AuthController - No authentication found");
+            return ResponseEntity.status(401).body("No authentication");
+        }
+        
+        Utilisateur user = (Utilisateur) authentication.getPrincipal();
+        System.out.println("✅ AuthController - User authenticated: " + user.getEmail());
+        
+        return ResponseEntity.ok(Map.of(
+            "message", "Authentication successful",
+            "user", user.getEmail(),
+            "role", user.getRole().name()
+        ));
     }
 }

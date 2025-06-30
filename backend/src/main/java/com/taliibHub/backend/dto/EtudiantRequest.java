@@ -19,7 +19,7 @@ public class EtudiantRequest {
         private String matricule;
         private Date dateInscription;
 
-        // Getters and Setters
+
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
         
@@ -48,7 +48,7 @@ public class EtudiantRequest {
         public void setDateInscription(Date dateInscription) { this.dateInscription = dateInscription; }
     }
 
-    // Getters and Setters
+
     public EtudiantData getEtudiant() { return etudiant; }
     public void setEtudiant(EtudiantData etudiant) { this.etudiant = etudiant; }
     
