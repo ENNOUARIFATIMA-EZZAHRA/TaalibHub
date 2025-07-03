@@ -100,15 +100,15 @@ public class AuthController {
 
     @GetMapping("/test-auth")
     public ResponseEntity<?> testAuth(Authentication authentication) {
-        System.out.println("🔐 AuthController - testAuth called");
+        System.out.println("AuthController - testAuth called");
         
         if (authentication == null || authentication.getPrincipal() == null) {
-            System.out.println("❌ AuthController - No authentication found");
+            System.out.println("AuthController - No authentication found");
             return ResponseEntity.status(401).body("No authentication");
         }
         
         Utilisateur user = (Utilisateur) authentication.getPrincipal();
-        System.out.println("✅ AuthController - User authenticated: " + user.getEmail());
+        System.out.println("AuthController - User authenticated: " + user.getEmail());
         
         return ResponseEntity.ok(Map.of(
             "message", "Authentication successful",

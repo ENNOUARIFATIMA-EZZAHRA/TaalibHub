@@ -42,6 +42,21 @@
               </div>
             </div>
 
+            <!-- Prénom Field (Register only) -->
+            <div *ngIf="!isLogin" class="transition-all duration-300 ease-out">
+              <label class="form-label">First Name</label>
+              <div class="relative">
+                <input
+                  type="text"
+                  [(ngModel)]="prenom"
+                  name="prenom"
+                  required
+                  class="input-field"
+                  placeholder="Ali"
+                />
+              </div>
+            </div>
+
             <!-- Email Field -->
             <div>
               <label class="form-label">Email Address</label>
@@ -103,6 +118,15 @@
                 </button>
               </div>
               <p *ngIf="confirmPassword && !validateConfirmPassword()" class="error-message">Passwords do not match</p>
+            </div>
+
+            <!-- Role Field (Register only) -->
+            <div *ngIf="!isLogin" class="transition-all duration-300 ease-out">
+              <label class="form-label">Register as</label>
+              <select [(ngModel)]="role" name="role" class="input-field">
+                <option value="ETUDIANT">Student</option>
+                <option value="ENSEIGNANT">Teacher</option>
+              </select>
             </div>
 
             <!-- Submit Button -->

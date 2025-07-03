@@ -24,18 +24,18 @@ public class FeedbackController {
     private NoteRepository noteRepository;
 
     @GetMapping("/{etudiantId}")
-    public ResponseEntity<List<Feedback>> getFeedbackForStudent(@PathVariable String etudiantId, Authentication authentication) {
+    public ResponseEntity<List<Feedback>> getFeedbackForStudent(@PathVariable String etudiantId) {
         System.out.println("Requête reçue pour les feedbacks de l'étudiant: " + etudiantId);
         System.out.println("FeedbackController - getFeedbackForStudent called for student: " + etudiantId);
         try {
             List<Feedback> feedbacks;
             try {
-                // Try to parse as int (student number)
+
                 int studentNum = Integer.parseInt(etudiantId);
                 System.out.println("FeedbackController - Using numeric student number: " + studentNum);
                 feedbacks = getFeedbackByStudentNum(studentNum);
             } catch (NumberFormatException e) {
-                // If not an int, treat as UUID
+
                 System.out.println("FeedbackController - Using UUID method for student: " + etudiantId);
                 feedbacks = getFeedbackByStudentUUID(etudiantId);
             }
@@ -48,7 +48,7 @@ public class FeedbackController {
     }
     
     private List<Feedback> getFeedbackByStudentNum(int studentNum) {
-        // Get notes for the student, then get feedback for each note
+
         return noteRepository.findByEtudiantNum(studentNum)
             .stream()
             .map(note -> feedbackRepository.findByNote(note))
@@ -57,7 +57,6 @@ public class FeedbackController {
     }
     
     private List<Feedback> getFeedbackByStudentUUID(String studentUUID) {
-        // Get notes for the student by UUID, then get feedback for each note
         return noteRepository.findByEtudiantId(studentUUID)
             .stream()
             .map(note -> feedbackRepository.findByNote(note))

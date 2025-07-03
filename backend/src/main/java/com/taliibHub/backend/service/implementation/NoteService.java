@@ -18,7 +18,7 @@ public class NoteService {
     private FeedbackRepository feedbackRepository;
 
     public List<NoteDetailsDTO> getNotesForEtudiant(int etudiantNum) {
-        System.out.println("🔍 NoteService - getNotesForEtudiant called for student: " + etudiantNum);
+        System.out.println("NoteService - getNotesForEtudiant called for student: " + etudiantNum);
         
         List<Note> notes = noteRepository.findByEtudiantNum(etudiantNum);
         System.out.println("NoteService - Found " + notes.size() + " notes from repository");

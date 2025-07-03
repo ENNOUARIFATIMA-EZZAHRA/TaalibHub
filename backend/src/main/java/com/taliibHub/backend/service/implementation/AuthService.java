@@ -5,6 +5,7 @@ import com.taliibHub.backend.dto.AuthResponse;
 import com.taliibHub.backend.dto.RegisterRequest;
 import com.taliibHub.backend.model.Utilisateur;
 import com.taliibHub.backend.model.Etudiant;
+import com.taliibHub.backend.model.Enseignant;
 import com.taliibHub.backend.repository.UtilisateurRepository;
 import com.taliibHub.backend.repository.EtudiantRepository;
 import com.taliibHub.backend.security.JwtUtil;
@@ -33,26 +34,42 @@ public class AuthService {
 
     @Transactional
     public AuthResponse register(RegisterRequest req) {
-        if (etudiantRepository.findByEmail(req.getEmail()) != null) {
+        if (utilisateurRepository.findByEmail(req.getEmail()).isPresent()) {
             throw new RuntimeException("Cet email est déjà utilisé.");
         }
-        
         String userId = UUID.randomUUID().toString();
-        
-        // Create and save Etudiant (which extends Utilisateur)
-        Etudiant etudiant = new Etudiant();
-        etudiant.setId(userId);
-        etudiant.setNom(req.getNom());
-        etudiant.setEmail(req.getEmail());
-        etudiant.setMotDePass(passwordEncoder.encode(req.getPassword()));
-        etudiant.setRole(RoleUtilisateur.ETUDIANT);
-        etudiant.setDateInscription(new Date());
-        etudiantRepository.save(etudiant);
-        
-        String token = jwtUtil.generateToken(etudiant);
+        Utilisateur user;
+        if (req.getRole() == RoleUtilisateur.ENSEIGNANT) {
+            // Création d'un enseignant
+            Enseignant enseignant = new Enseignant();
+            enseignant.setId(userId);
+            enseignant.setNom(req.getNom());
+            enseignant.setPrenom(req.getPrenom());
+            enseignant.setEmail(req.getEmail());
+            enseignant.setMotDePass(passwordEncoder.encode(req.getPassword()));
+            enseignant.setRole(RoleUtilisateur.ENSEIGNANT);
+            if (req.getSpecialite() != null) {
+                enseignant.setSpecialite(req.getSpecialite());
+            }
+            utilisateurRepository.save(enseignant);
+            user = enseignant;
+        } else {
+            // Par défaut ou si ETUDIANT
+            Etudiant etudiant = new Etudiant();
+            etudiant.setId(userId);
+            etudiant.setNom(req.getNom());
+            etudiant.setPrenom(req.getPrenom());
+            etudiant.setEmail(req.getEmail());
+            etudiant.setMotDePass(passwordEncoder.encode(req.getPassword()));
+            etudiant.setRole(RoleUtilisateur.ETUDIANT);
+            etudiant.setDateInscription(new Date());
+            etudiantRepository.save(etudiant);
+            user = etudiant;
+        }
+        String token = jwtUtil.generateToken(user);
         AuthResponse res = new AuthResponse();
         res.setToken(token);
-        res.setUser(etudiant);
+        res.setUser(user);
         return res;
     }
 

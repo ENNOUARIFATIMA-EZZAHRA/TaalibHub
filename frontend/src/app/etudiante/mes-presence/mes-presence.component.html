@@ -1,0 +1,78 @@
+<app-navbar-etudiant></app-navbar-etudiant>
+<div class="bg-gray-50 min-h-screen py-8 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-bold mb-2">Mon Assiduité</h2>
+    <p class="text-gray-500 mb-6">Suivez votre taux de présence et votre assiduité aux cours</p>
+    <!-- Statistiques -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <span class="text-gray-500 text-sm mb-2">Taux de Présence</span>
+        <span class="text-3xl font-bold text-green-600">{{ tauxPresence }}%</span>
+        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+          <div class="bg-green-500 h-2 rounded-full" [style.width.%]="tauxPresence"></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <span class="text-gray-500 text-sm mb-2">Présences</span>
+        <span class="text-xl font-bold text-green-600">{{ nbPresences }}</span>
+        <span class="text-xs text-gray-400">sur {{ totalSeances }} séances</span>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <span class="text-gray-500 text-sm mb-2">Retards</span>
+        <span class="text-xl font-bold text-yellow-500">{{ nbRetards }}</span>
+        <span class="text-xs text-gray-400">séances en retard</span>
+      </div>
+      <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <span class="text-gray-500 text-sm mb-2">Absences</span>
+        <span class="text-xl font-bold text-red-500">{{ nbAbsences }}</span>
+        <span class="text-xs text-gray-400">séances manquées</span>
+      </div>
+    </div>
+    <!-- Historique -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3M16 7V3M4 11h16M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        Historique des Présences
+      </h3>
+      <div *ngIf="presences.length === 0" class="text-center text-gray-400 py-8">
+        <svg class="mx-auto mb-2 w-10 h-10 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="10"></circle></svg>
+        <p>Aucune présence trouvée.</p>
+      </div>
+      <div *ngFor="let presence of presences" class="flex items-center justify-between border-b last:border-b-0 py-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span [ngClass]="{
+              'text-green-600': presence.statut === 'Présent',
+              'text-yellow-500': presence.statut === 'En retard',
+              'text-red-500': presence.statut === 'Absent'
+            }">
+              <svg *ngIf="presence.statut === 'Présent'" class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+              <svg *ngIf="presence.statut === 'En retard'" class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="10"></circle></svg>
+              <svg *ngIf="presence.statut === 'Absent'" class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+            </span>
+            <span class="font-semibold">{{ presence.cours }}</span>
+          </div>
+          <div class="text-xs text-gray-500">{{ presence.date }}</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-gray-400 text-sm">{{ presence.heure }}</span>
+          <span
+            class="px-3 py-1 rounded-full text-xs font-semibold"
+            [ngClass]="{
+              'bg-green-100 text-green-700': presence.statut === 'Présent',
+              'bg-yellow-100 text-yellow-700': presence.statut === 'En retard',
+              'bg-red-100 text-red-700': presence.statut === 'Absent'
+            }"
+          >
+            {{ presence.statut }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+

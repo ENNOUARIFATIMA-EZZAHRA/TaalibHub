@@ -9,5 +9,6 @@ export const routes: Routes = [
   { path: 'etudiante/dashboard', loadComponent: () => import('./etudiante/dashboard/dashboard.component').then(m => m.DashboardComponent), canActivate: [AuthGuard] },
   { path: 'etudiante/mes-cours', loadComponent: () => import('./etudiante/mes-cours/mes-cours.component').then(m => m.MesCoursComponent), canActivate: [AuthGuard] },
   { path: 'etudiante/mes-notes', loadComponent: () => import('./etudiante/mes-notes/mes-notes.component').then(m => m.MesNotesComponent), canActivate: [AuthGuard] },
+  { path: 'etudiante/presence', loadComponent: () => import('./etudiante/mes-presence/mes-presence.component').then(m => m.MesPresenceComponent), canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/auth' }
 ];

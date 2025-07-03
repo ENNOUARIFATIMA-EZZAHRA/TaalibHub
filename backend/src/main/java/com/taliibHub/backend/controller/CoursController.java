@@ -36,13 +36,13 @@ public class CoursController {
         System.out.println("🔍 CoursController - User authenticated: " + user.getEmail());
         
         try {
-            // في الوقت الحالي، نعيد جميع الكورسات
-            // يمكن تعديل هذا لاحقاً حسب احتياجات الطالب
+
+
             List<Cours> cours = coursRepository.findAll();
-            System.out.println("✅ CoursController - Found " + cours.size() + " courses");
+            System.out.println("CoursController - Found " + cours.size() + " courses");
             return ResponseEntity.ok(cours);
         } catch (Exception e) {
-            System.out.println("❌ CoursController - Error fetching courses: " + e.getMessage());
+            System.out.println("CoursController - Error fetching courses: " + e.getMessage());
             return ResponseEntity.status(500).build();
         }
     }

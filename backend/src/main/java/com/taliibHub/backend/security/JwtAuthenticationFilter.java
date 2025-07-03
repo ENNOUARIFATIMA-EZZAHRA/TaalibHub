@@ -15,9 +15,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -55,18 +57,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             System.out.println("JwtAuthenticationFilter - No Authorization header or invalid format");
         }
 
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
-            if (utilisateur != null) {
-                System.out.println("JwtAuthenticationFilter - User found: " + utilisateur.getEmail());
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        utilisateur, null, Collections.emptyList());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println("JwtAuthenticationFilter - Authentication set successfully");
-            } else {
-                System.out.println("JwtAuthenticationFilter - User not found for email: " + email);
-            }
+        Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findByEmail(email);
+        if (utilisateurOptional.isPresent()) {
+            Utilisateur utilisateur = utilisateurOptional.get();
+            System.out.println("JwtAuthenticationFilter - User found: " + utilisateur.getEmail());
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    utilisateur, null, 
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + utilisateur.getRole().name()))
+            );
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+            System.out.println("JwtAuthenticationFilter - Authentication set successfully");
         } else if (email == null) {
             System.out.println("JwtAuthenticationFilter - No email extracted from token");
         } else {
