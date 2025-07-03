@@ -19,8 +19,11 @@ export class AuthComponent {
   password = '';
   confirmPassword = '';
   name = '';
+  prenom = '';
   loading = false;
   errorMessage = '';
+  role = 'ETUDIANT'; // Par défaut
+  specialite = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -110,7 +113,7 @@ export class AuthComponent {
 
   private async register() {
     try {
-      const response = await this.authService.register(this.name, this.email, this.password).toPromise();
+      const response = await this.authService.register(this.name, this.prenom, this.email, this.password, this.role, this.specialite).toPromise();
 
       if (response) {
         // Switch to login mode after successful registration
@@ -118,6 +121,8 @@ export class AuthComponent {
         this.password = '';
         this.confirmPassword = '';
         this.name = '';
+        this.prenom = '';
+        this.specialite = '';
         alert('Registration successful! Please login.');
       } else {
         throw new Error('Registration failed - no response received');
@@ -140,5 +145,7 @@ export class AuthComponent {
     this.password = '';
     this.confirmPassword = '';
     this.name = '';
+    this.prenom = '';
+    this.specialite = '';
   }
 }

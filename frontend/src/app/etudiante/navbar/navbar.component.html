@@ -45,6 +45,13 @@
       <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M7 17V7a2 2 0 012-2h6a2 2 0 012 2v10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>Mes Notes</span>
     </a>
+    <a routerLink="/etudiante/presence"
+       routerLinkActive="text-blue-700 font-semibold border-b-2 border-blue-700"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="flex items-center space-x-1 text-sm">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M7 17V7a2 2 0 012-2h6a2 2 0 012 2v10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h10" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Presence</span>
+    </a>
     <a routerLink="#" class="text-gray-700 hover:text-blue-700 flex items-center space-x-1 text-sm">
       <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" fill="#374151"/><text x="8" y="15" font-size="8" fill="#fff">!</text></svg>
       <span>Mes Feedbacks</span>
@@ -52,10 +59,7 @@
   </div>
   <!-- Profil -->
   <div class="flex items-center space-x-3">
-    <!-- Test Auth Button -->
-    <button (click)="testAuth()" class="bg-red-500 text-white px-2 py-1 rounded text-xs">
-      Test Auth
-    </button>
+
     <!-- Logout Button -->
     <button (click)="logout()" class="bg-gray-500 text-white px-2 py-1 rounded text-xs">
       Logout
@@ -73,4 +77,4 @@
       <img [src]="avatarUrl" alt="avatar" class="h-10 w-10 rounded-full object-cover" />
     </div>
   </div>
-</nav> 
+</nav>

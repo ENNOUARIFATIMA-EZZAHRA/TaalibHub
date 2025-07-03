@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 import { MesFeedbackService } from '../../service/mes-feedback.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-mes-feedback',
   templateUrl: './mes-feedback.component.html',
   styleUrls: ['./mes-feedback.component.css'],
   standalone: true,
-  imports: [CommonModule, NavbarComponent]
+  imports: [CommonModule]
 })
 export class MesFeedbackComponent implements OnInit {
   feedbacks: any[] = [];
@@ -26,13 +25,13 @@ export class MesFeedbackComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.error = null;
-    
+
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     console.log('👤 Etudiant user (MesFeedback):', user);
     let num = user?.num;
     console.log('📘 Etudiant num (MesFeedback):', num);
 
-    // إذا كان num = 0 أو غير موجود، استخدم ID كبديل مؤقت
+
     if (!num || num === 0) {
       num = user?.id;
       console.log('📘 Etudiant using ID as fallback (MesFeedback):', num);
@@ -86,4 +85,4 @@ export class MesFeedbackComponent implements OnInit {
         this.loading = false;
       });
   }
-} 
+}

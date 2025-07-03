@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { MesNotesService } from './mes-notes.service';
+import { MesNotesService } from '../../service/mes-notes.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -59,7 +59,7 @@ export class MesNotesComponent implements OnInit {
           return of([]);
         })
       )
-      .subscribe(data => {
+      .subscribe((data: any) => {
         console.log('🔍 MesNotesComponent - Notes loaded successfully:', data);
         this.notes = data;
         this.nbEvaluations = data.length;
