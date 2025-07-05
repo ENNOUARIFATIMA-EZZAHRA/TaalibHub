@@ -1,4 +1,7 @@
 package com.taliibHub.backend.repository;
 
-public class EnseignantRepository {
+import com.taliibHub.backend.model.Enseignant;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EnseignantRepository extends JpaRepository<Enseignant, String> {
 }
