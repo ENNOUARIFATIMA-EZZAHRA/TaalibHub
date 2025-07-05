@@ -40,12 +40,13 @@ public class SecurityConfig {
                 .requestMatchers("/api/administrateurs/**").authenticated()
                 .requestMatchers("/api/feedback/**").permitAll()
                 .requestMatchers("/api/presence/**").authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        ;
 
         return http.build();
     }

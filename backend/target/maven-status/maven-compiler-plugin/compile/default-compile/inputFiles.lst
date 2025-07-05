@@ -23,10 +23,10 @@ C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\c
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\controller\EtudiantController.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\controller\FeedbackController.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\repository\EtudiantRepository.java
+C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\dto\PresenceDashboardDTO.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\enums\TypeEvaluation.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\controller\EnseignantController.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\service\implementation\FeedbackService.java
-C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\controller\AdministrateurController.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\config\SecurityConfig.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\dto\UserRequest.java
 C:\Users\ENAA\Desktop\Projects\test\fil rouge\TaaliibHub\backend\src\main\java\com\taliibHub\backend\dto\AuthResponse.java

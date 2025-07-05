@@ -74,27 +74,27 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthRequest req) {
-        Etudiant etudiant = etudiantRepository.findByEmail(req.getEmail());
+        Utilisateur user = utilisateurRepository.findByEmail(req.getEmail()).orElse(null);
         logger.info("Tentative de connexion pour l'email : {}", req.getEmail());
-        if (etudiant == null) {
+        if (user == null) {
             logger.warn("Aucun utilisateur trouvé pour l'email : {}", req.getEmail());
         } else {
             logger.info("Mot de passe reçu : {}", req.getPassword());
-            logger.info("Hash stocké : {}", etudiant.getMotDePass());
-            boolean match = passwordEncoder.matches(req.getPassword(), etudiant.getMotDePass());
+            logger.info("Hash stocké : {}", user.getMotDePass());
+            boolean match = passwordEncoder.matches(req.getPassword(), user.getMotDePass());
             logger.info("Résultat du passwordEncoder.matches : {}", match);
         }
-        if (etudiant == null || !passwordEncoder.matches(req.getPassword(), etudiant.getMotDePass())) {
+        if (user == null || !passwordEncoder.matches(req.getPassword(), user.getMotDePass())) {
             throw new RuntimeException("Email ou mot de passe incorrect");
         }
-        String token = jwtUtil.generateToken(etudiant);
+        String token = jwtUtil.generateToken(user);
         AuthResponse res = new AuthResponse();
         res.setToken(token);
-        res.setUser(etudiant);
+        res.setUser(user);
         return res;
     }
 
     public Utilisateur getCurrentUser(String email) {
-        return etudiantRepository.findByEmail(email);
+        return utilisateurRepository.findByEmail(email).orElse(null);
     }
 }

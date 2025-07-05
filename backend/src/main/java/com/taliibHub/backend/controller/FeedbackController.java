@@ -4,8 +4,11 @@ import com.taliibHub.backend.model.Feedback;
 import com.taliibHub.backend.model.Utilisateur;
 import com.taliibHub.backend.repository.FeedbackRepository;
 import com.taliibHub.backend.repository.NoteRepository;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.taliibHub.backend.repository.EtudiantRepository;
+import com.taliibHub.backend.repository.EnseignantRepository;
+import com.taliibHub.backend.repository.CoursRepository;
+import com.taliibHub.backend.dto.FeedbackDTO;
+import com.taliibHub.backend.mapper.FeedbackMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,7 +20,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/feedback")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
-@Tag(name = "Feedback", description = "Opérations de gestion des feedbacks étudiants/enseignants")
 public class FeedbackController {
     
     @Autowired
@@ -26,8 +28,14 @@ public class FeedbackController {
     @Autowired
     private NoteRepository noteRepository;
 
+    @Autowired
+    private EtudiantRepository etudiantRepository;
+    @Autowired
+    private EnseignantRepository enseignantRepository;
+    @Autowired
+    private CoursRepository coursRepository;
+
     @GetMapping("/{etudiantId}")
-    @Operation(summary = "Récupérer les feedbacks d'un étudiant", description = "Retourne la liste des feedbacks associés à un étudiant donné (par ID ou numéro)")
     public ResponseEntity<List<Feedback>> getFeedbackForStudent(@PathVariable String etudiantId) {
         System.out.println("Requête reçue pour les feedbacks de l'étudiant: " + etudiantId);
         System.out.println("FeedbackController - getFeedbackForStudent called for student: " + etudiantId);
@@ -66,5 +74,20 @@ public class FeedbackController {
             .map(note -> feedbackRepository.findByNote(note))
             .filter(feedback -> feedback != null)
             .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public FeedbackDTO ajouterFeedback(@RequestBody Feedback feedback) {
+        if (feedback.getEtudiant() != null && feedback.getEtudiant().getId() != null) {
+            feedback.setEtudiant(etudiantRepository.findById(feedback.getEtudiant().getId()).orElse(null));
+        }
+        if (feedback.getEnseignant() != null && feedback.getEnseignant().getId() != null) {
+            feedback.setEnseignant(enseignantRepository.findById(feedback.getEnseignant().getId()).orElse(null));
+        }
+        if (feedback.getCours() != null && feedback.getCours().getId() != null) {
+            feedback.setCours(coursRepository.findById(feedback.getCours().getId()).orElse(null));
+        }
+        Feedback saved = feedbackRepository.save(feedback);
+        return FeedbackMapper.toDTO(saved);
     }
 }
