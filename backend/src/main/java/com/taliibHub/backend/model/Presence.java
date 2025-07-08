@@ -24,8 +24,10 @@ public class Presence {
 
     private String heure;
 
+    public Etudiant getEtudiant() { return etudiant; }
     public Cours getCours() { return cours; }
     public Date getDate() { return date; }
     public Status getStatus() { return status; }
     public String getHeure() { return heure; }
+    public Long getId() { return id; }
 }
