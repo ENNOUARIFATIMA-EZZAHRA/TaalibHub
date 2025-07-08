@@ -7,7 +7,7 @@ public class PresenceMapper {
         PresenceDTO dto = new PresenceDTO();
         dto.setId(presence.getId());
         dto.setDate(presence.getDate());
-        dto.setStatus(presence.getStatus());
+        dto.setStatus(presence.getStatus() != null ? presence.getStatus().name() : null);
         if (presence.getEtudiant() != null) dto.setEtudiantId(presence.getEtudiant().getId());
         if (presence.getCours() != null) dto.setCoursId(presence.getCours().getId());
         return dto;
